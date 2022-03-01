@@ -1,58 +1,26 @@
 <?php
-//Login authentication?
+//db queries -> use info in get function to query into db
 
-if(isset($_POST["login"])){
-  $email = null;
-  $password = null;
-  if(isset($_POST["email"])){
-    $email = $_POST["email"];
+function getDB(){
+  global $db;
+  //this function returns an existing connection or creates a new one if needed
+  //and assigns it to the $db variable
+  if(!isset($db)) {
+      try{
+          //__DIR__ helps get the correct path regardless of where the file is being called from
+          //it gets the absolute path to this file, then we append the relative url (so up a directory and inside lib)
+          require_once(__DIR__. "/../lib/config.php");//pull in our credentials
+          //use the variables from config to populate our connection
+          $connection_string = "mysql:host=$dbhost;dbname=$dbdatabase;charset=utf8mb4";
+          //using the PDO connector create a new connect to the DB
+          //if no error occurs we're connected
+          $db = new PDO($connection_string, $dbuser, $dbpass);
+      }
+  catch(Exception $e){
+          var_export($e);
+          $db = null;
+      }
   }
-  if(isset($_POST["password"])){
-    $password = $_POST["password"];
-  }
-  $isValid = true;
-  if(!isset($email) || !isset($password)){
-   $isValid = false; 
-  }
-  if(!strpos($email, "@")){
-   $isValid = false;
-    echo "<br>Invalid email<br>";
-  }
-  if($isValid){
-    require_once(__DIR__."/../lib/db.php");
-    $db = getDB();
-	if(isset($db)){
-		$stmt = $db->prepare("SELECT id, email, password from Users WHERE email = :email LIMIT 1");
-		
-		$params = array(":email"=>$email);
-		$r = $stmt->execute($params);
-		echo "db returned: " . var_export($r, true);
-		$e = $stmt->errorInfo();
-		if($e[0] != "00000"){
-			echo "uh oh something went wrong: " . var_export($e, true);
-		}
-		$result = $stmt->fetch(PDO::FETCH_ASSOC);
-		if($result && isset($result["password"])){
-			$password_hash_from_db = $result["password"];
-			if(password_verify($password, $password_hash_from_db)){
-        session_start();//we only need to active session when it's worth activating it
-        unset($result["password"]);//remove password so we don't leak it beyond this page
-        //let's create a session for our user based on the other data we pulled from the table
-        $_SESSION["user"] = $result;//we can save the entire result array since we removed password
-        //on successful login let's serve-side redirect the user to the home page.
-			  header("Location: home.php");
-			}
-			else{
-			 echo "<br>Invalid password, get out!<br>"; 
-			}
-		}
-		else{
-			echo "<br>Invalid user<br>";
-		}
-	}
-  }
-  else{
-   echo "There was a validation issue"; 
-  }
+  return $db;
 }
 ?>

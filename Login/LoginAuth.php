@@ -1,5 +1,5 @@
+
 <?php
-//Login authentication?
 
 if(isset($_POST["login"])){
   $email = null;

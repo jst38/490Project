@@ -12,7 +12,7 @@ $dsn = "mysql:host=$host;dbname=$databaseName;charset=$char";
 
 try{
     //create a PDO instance
-    $dbConnection = new PDO($dsn, $username, $password);
+    $pdo = new PDO($dsn, $username, $password);
     $dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //PDO::ATTR_ERRMODE, , PDO::ErrMOde_Warning
     echo "connection successful";
 

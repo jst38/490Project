@@ -3,7 +3,7 @@
 $host = "localhost"; //where is my db stored?
 $databaseName = "test_db";
 $username = "testuser";
-$password = "test123!"
+$password = "test123!";
 
 $dsn = "mysql:host=$host;dbname=$databaseName";
 

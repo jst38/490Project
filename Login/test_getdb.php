@@ -12,13 +12,13 @@ $dsn = "mysql:host=$host;dbname=$databaseName;charset=$char";
 
 try{
     //create a PDO instance
-    $pdo = new PDO($dsn, $username, $password);
+    $dbConnection = new PDO($dsn, $username, $password);
     $dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //PDO::ATTR_ERRMODE, , PDO::ErrMOde_Warning
     echo "connection successful";
 
     $sql = "Select * From students";
     //prepare -> sends sql statement to db to be translated for execution + prevents sql injections
-    $stmt = $pdo->prepare($sql);
+    $stmt = $dbConnection->prepare($sql);
     //execute -> tells db to execute sql statement + extra parameters and puts it into $results
     $results = $stmt->execute();
 

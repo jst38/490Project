@@ -12,6 +12,8 @@ function requestProcessor($request){
     }
     switch ($request['type'])
     {
+    case "login":
+        return login($request['Username'],$request['password']);
     case "registerUser":
       return registerUser($request['email'], $request['Firstname'],$request['Lastname'],$request['Username'],$request['password']);
   }

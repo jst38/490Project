@@ -1,3 +1,4 @@
+#!usr/bin/php
 <?php
 
 $host = "localhost"; //where is my db stored?
@@ -20,9 +21,13 @@ try{
     //prepare -> sends sql statement to db to be translated for execution + prevents sql injections
     $stmt = $dbConnection->prepare($sql);
     //execute -> tells db to execute sql statement + extra parameters and puts it into $results
-    $results = $stmt->execute();
+    $(array)results = $stmt->execute();
+
 
     //$users = $dbConnection->query($sql);
+    if (is_array($results) || is_object($results){
+        echo "results are array and object";
+    }
 
     foreach($results AS $user){
         echo "<li>". $user["name"] . "<li>";

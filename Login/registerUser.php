@@ -26,10 +26,8 @@ function registerUser($email, $Fname, $Lname, $Username, $Password) {
             
         }
     } catch (\Throwable $th) {
-        return  echo "you cant reg. DB "  
+        return "you cant reg. DB "; 
 
     } 
-
-    
 }
 ?>

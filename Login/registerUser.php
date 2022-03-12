@@ -5,20 +5,31 @@ require_once('get_host_info.inc');
 require_once('rabbitMQLib.inc');
 
 function registerUser($email, $Fname, $Lname, $Username, $Password) {
-    require_once("getdb.php");
+    try {
+        require_once("getdb.php");
     $db = getDB();
 
         if(isset($db)){
-            $stmt = $db->prepare("Insert INTO users(email, Fname, Lname, Username, Password) Values(email, first name, last name, username, password)");
-            //execute -> tells db to execute sql statement + extra parameters and puts it into $results
+            $stmt = $db->prepare("Insert INTO users(email, Fname, Lname, Username, Password) Values (:email, :Fname, :nLame, :username, :password)");
+            $params = array(
+                ":email"=>$email,
+                ":Fname"=>$Fname,
+                ":Lname"=>$Lname,
+                ":Username"=>$username,
+                ":Password"=>$password,
+                );
+            $results = $stmt->execute($params);
+           // echo "db returned: " . var_export($r, true);
+           // $e = $stmt->errorInfo();
+		   
+			echo "<br>Welcome! You successfully registered, please login.";
             
-            $results = $stmt->execute();
-            echo "db returned: " . var_export($r, true);
-            $e = $stmt->errorInfo();
-		    if($e[0] == "00000"){
-			    echo "<br>Welcome! You successfully registered, please login.";
-            }
         }
-    return  echo "Something went wrong."   
+    } catch (\Throwable $th) {
+        return  echo "you cant reg. DB "  
+
+    } 
+
+    
 }
 ?>

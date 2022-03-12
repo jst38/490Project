@@ -16,6 +16,7 @@ function requestProcessor($request){
         return login($request['Username'],$request['password']);
     case "registerUser":
       return registerUser($request['email'], $request['Firstname'],$request['Lastname'],$request['Username'],$request['password']);
+      
   }
   //return array("returnCode" => '0', 'message'=>"Server received request and processed");
 }

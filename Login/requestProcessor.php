@@ -21,7 +21,7 @@ function requestProcessor($request){
   //return array("returnCode" => '0', 'message'=>"Server received request and processed");
 }
 //Use the right queue for this + server
-$server = new rabbitMQServer("RabbitMQ.ini","testserver"); 
+$server = new rabbitMQServer("rabbitMQ.ini","testServer");
 
 $server->process_requests('requestProcessor');
 exit();

@@ -30,7 +30,7 @@ function login($username,$password){
                 echo "<pre>" . var_export($_SESSION, true) . "</pre>";
             }
         }
-        return  echo "Something went wrong."   
+        return "Something went wrong.";  
     }
     
     // lookup username in databas

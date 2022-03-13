@@ -24,6 +24,7 @@ function getdb(){
                     echo $error->getCode();
                 }
         return $db;
+
     }
 }
 

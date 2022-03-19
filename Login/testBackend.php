@@ -2,7 +2,7 @@
 
 <?php
 
-require_once(__DIR__ . "/getdb.php");
+require_once(__DIR__ . "/rpc/getdb.php");
 $db = getDB();
     if(isset($db)){
         echo"db is set";

@@ -51,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body>
     <h1>Register</h1>
-    <form action="register.php" method="post">
+    <form action="registerUser.php" method="post">
 
     <label for="input-email">
             email

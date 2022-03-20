@@ -10,6 +10,10 @@ function registerUser($email, $Fname, $Lname, $Username, $Password) {
     $db = getDB();
 
         if(isset($db)){
+
+            $salt = random_bytes(16);
+            $password_hash = hash("sha256", $salt . $password, true);
+
             $stmt = $db->prepare("Insert INTO users(email, Fname, Lname, Username, Password) Values (:email, :Fname, :nLame, :username, :password)");
             $params = array(
                 ":email"=>$email,

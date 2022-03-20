@@ -1,5 +1,6 @@
 #!/usr/bin/php
 <?php
+
 require_once('path.ini');
 require_once('get_host_info.inc');
 require_once('rabbitMQLib.inc');
@@ -7,6 +8,7 @@ require_once('rabbitMQLib.inc');
 function requestProcessor($request){
     var_dump($request);
     if(!isset($request['type']))
+
     {
     return "ERROR: unsupported message type";
     }

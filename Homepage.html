@@ -1,0 +1,54 @@
+<?php
+require_once('path.inc');
+require_once('get_host_info.inc');
+require_once('rabbitMQLib.inc');
+    $msg = "";
+    
+    if (isset($_POST['SUBMIT']))  {
+        $name = $_POST['first name'];
+        $name = $_POST['Last name'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $cPassword = $_POST['cPassword'];
+
+        if ($password != $cPassword)
+            $msg = "Please Check Your Passwords!";
+        else {
+                
+        }
+    }
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minumum-scale=1.0"
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>PHP Password Hashing - Register</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="container" style="margin-top: 100px;">
+            <div class="row justify-content-center">
+                <div class="col-md-6 col-md-offset-3" align="center"
+                    <img src="kitchen.png"><br><br>
+
+                    <?php if ($msg != "") echo $msg. "<br>HELLO WELCOME TO OUR PAGE</br>
+
+                    <form method="post" action="register.php">
+                        <input class="form-control" minlength="3" name="First name" placeholder="First Name..."><br>
+                        <input class="form-control" minlength="3" name="Last name" placeholder="Last Name..."><br>
+                        <input class="form-control" name="email" type="email" placeholder="Email..."><br>
+                        <input class="form-control" minlength="5" name="password" type="password" placeholder="Password..."><br>
+                        <input class="form-control" minlength="5" name="cPassword" type="password" placeholder="Confirm Password..."><br>
+                        <input class="btn btn-primary" name="submit" type="submit" value="Register..."><br>
+                    </form>
+
+            </div>    
+        </div>
+    </body>
+    </html>
+    
+

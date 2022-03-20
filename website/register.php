@@ -1,9 +1,29 @@
+<?php
+
+require_once(__DIR__."/RabbitMQClient.php");
+require ("php-amqplib/php-amqplib":)
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $email = $_POST["email"];
+    $fname = $_POST["fname"];
+    $lname = $_POST["lname"];
+    $username = $_POST["username"];
+    $password = $_POST["password"];
+
+    //check session_token?
+
+    //need a way to call MQClient here
+
+
+}
+?>
+
 <!DOCTYPE html>
 <html>
     <body>
         <h1> Register Page</h1>
 
-        <form action="testRabbitMQClient.php">
+        <form action="register.php" method="POST">
             <label>for="email">email:></label>
             <input type="text" id="email" name="email"><br><br>
 

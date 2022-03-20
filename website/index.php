@@ -1,4 +1,4 @@
-done by Denise
+#!usr/bin/php
 
 <?php
 $session_token = $_COOKIE["session_token"];

@@ -37,6 +37,12 @@ section {
     color: rgb(238, 203, 50);
     margin-bottom: 30px;
 }
+.steps {
+    text-align: center;
+    font-size: 2rem;
+    color: rgb(238, 203, 50);
+    margin-bottom: 30px;
+}
 form {
     width: 90%;
     max-width: 400px;

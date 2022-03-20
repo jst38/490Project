@@ -19,7 +19,7 @@ function requestProcessor($request){
     {
     case "login":
         return login($request['Username'],$request['password']);
-    case "registerUser":
+    case "register":
       return registerUser($request['email'], $request['Firstname'],$request['Lastname'],$request['Username'],$request['password']);
       
   }

@@ -1,6 +1,7 @@
 <?php
 
-require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__.'../vendor/autoload.php';
+//require "../include"
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 
 $connection = new AMQPStreamConnection('192.168.191.251', 5672, 'Denise', 'caff1');

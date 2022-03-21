@@ -1,7 +1,7 @@
 <?php
 
 require_once(__DIR__."/RabbitMQClient.php");
-require ("php-amqplib/php-amqplib":)
+require("php-amqplib/php-amqplib");
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $email = $_POST["email"];

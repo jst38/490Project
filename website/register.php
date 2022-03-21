@@ -11,7 +11,7 @@
     <body>
         <h1> Register Page</h1>
 
-        <form action="RabbitMQClient.php" method="POST" >
+        <form action="start_rpc_Client.php" method="POST" >
             <label>for="email">email:></label>
             <input type="text" id="email" name="email"><br><br>
 

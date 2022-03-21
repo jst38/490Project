@@ -1,7 +1,16 @@
 <?php
 
-require_once(__DIR__."/RabbitMQClient.php");
-require("php-amqplib/php-amqplib");
+//require_once(__DIR__."/RabbitMQClient.php");
+require_once("get_host_info.inc");
+require_once("path.inc");
+require_once("rabbitMQLib.inc");
+//require("php-amqplib/php-amqplib");
+
+function register($email, $fname, $lname, $username, $password){
+    $client = new rabbitMQClient("authenticationRabbitMQ.ini", "authentication");
+
+    $request = array();
+}
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $email = $_POST["email"];
@@ -10,10 +19,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $username = $_POST["username"];
     $password = $_POST["password"];
 
+    
+
     //check session_token?
 
     //need a way to call MQClient here
-
 
 }
 ?>

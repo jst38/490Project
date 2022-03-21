@@ -1,31 +1,9 @@
 <?php
+//get this producer to work!!
+//Send message to exchange first, then based on rule/routing keys send msg to the right queue
+//routing keys enable you to bind queues to exchanges
+//RabbitMQ will look at routing key in $msg and the ones that bind the queue to the exchange to determine which queue to send msg too.
 
-//require_once(__DIR__."/RabbitMQClient.php");
-require_once("get_host_info.inc");
-require_once("path.inc");
-require_once("rabbitMQLib.inc");
-//require("php-amqplib/php-amqplib");
-
-function register($email, $fname, $lname, $username, $password){
-    $client = new rabbitMQClient("authenticationRabbitMQ.ini", "authentication");
-
-    $request = array();
-}
-
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $email = $_POST["email"];
-    $fname = $_POST["fname"];
-    $lname = $_POST["lname"];
-    $username = $_POST["username"];
-    $password = $_POST["password"];
-
-    
-
-    //check session_token?
-
-    //need a way to call MQClient here
-
-}
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <body>
         <h1> Register Page</h1>
 
-        <form action="register.php" method="POST">
+        <form action="RabbitMQClient.php" method="POST" >
             <label>for="email">email:></label>
             <input type="text" id="email" name="email"><br><br>
 

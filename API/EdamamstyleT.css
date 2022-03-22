@@ -31,7 +31,7 @@ section {
     padding: 20px;
 
 }
-.brand {
+.headline {
     text-align: center;
     font-size: 4rem;
     color: rgb(238, 203, 50);
@@ -85,7 +85,7 @@ form ion-icon {
     height: 300px;
     border-radius: 4px;
 }
-.flex-container {
+.food-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -117,7 +117,7 @@ form ion-icon {
     letter-spacing: 0.05rem;
     line-height: 2rem;
 }
-.container.initial .brand {
+.container.initial .headline {
     font-size: 7rem;
 }
   .container.initial form {

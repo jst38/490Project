@@ -26,7 +26,7 @@ function generateHTML(results){
         `
         <div class="item">
             <img src="${result.recipe.image}" alt="">
-            <div class="flex-container">
+            <div class="food-container">
                 <h1 class="title">${result.recipe.label}</h1>
                 <a class="view-button" href="${result.recipe.url}" target="_blank">View Recipe</a>
             </div>

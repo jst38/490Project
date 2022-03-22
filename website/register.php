@@ -37,7 +37,24 @@ function register($email, $fname, $lname, $username, $password){
 <!DOCTYPE html>
 <html>
     <body>
+    <head>
+        <title>MY FRIDGE API</title>
+        <link rel="stylesheet" href="style.css">
+            <div class="menu-bar"></div>
+            <div class="container" style="margin-top: 100px;">
+            <div class="row justify-content-center">
+                <div class="col-md-6 col-md-offset-3" align="center"
+                    <img src= "file:///C:/Users/musao/OneDrive/Desktop/SYSINT/Fridge.jpg" width="200", height="200"><br><br>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minumum-scale=1.0"
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>PHP - Register</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    </head>
         <h1> Register Page</h1>
+        <br>HELLO WELCOME TO OUR PAGE!!!</br>
+                    <a href="login.html">Log In Here</a>
 
         <form action="" method="POST" >
             <label for="email">email:</label>
@@ -59,4 +76,4 @@ function register($email, $fname, $lname, $username, $password){
         </form>
         <!--<button type="button" class="btn" onclick="start_rpc_client.php">Register</button> -->
     </body>
-</html>
+<html>

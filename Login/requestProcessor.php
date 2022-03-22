@@ -6,6 +6,7 @@
 require_once(__DIR__ .'/rpc/path.inc');
 require_once(__DIR__ .'/get_host_info.inc');
 require_once(__DIR__ .'/RabbitMQLib.inc');
+require_once(__DIR__ .'/registerUser.php');
 //require_once(__DIR__ .'/RabbitMQ.ini');
 
 function requestProcessor($request){

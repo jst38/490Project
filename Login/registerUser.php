@@ -3,6 +3,7 @@
 require_once(__DIR__ .'/rpc/path.inc');
 require_once(__DIR__ .'/get_host_info.inc');
 require_once(__DIR__ .'/RabbitMQLib.inc');
+//require(__DIR__ .'/requestProcessor.php');
 
 function registerUser($email, $Fname, $Lname, $Username, $Password) {
     try {

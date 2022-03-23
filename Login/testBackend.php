@@ -1,5 +1,45 @@
-#!/usr/bin/php
 
+<!--DOCTYPE html-->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+</head>
+
+<body>
+    <h1>Register</h1>
+    <form action="registerUser.php" method="post">
+
+    <label for="input-email">
+            email
+            <input type="text" name="email" id="email-username">
+        </label>
+
+    <label for="input-firstname">
+            firstname
+            <input type="text" name="firstname" id="input-firstname">
+        </label>
+
+    <label for="input-lastname">
+            lastname
+            <input type="text" name="lastname" id="input-lastname">
+        </label>        
+
+    <label for="input-username">
+            username
+            <input type="text" name="username" id="input-username">
+        </label>
+        
+    
+    <label for="input-password">
+            Password
+            <input type="password" name="password" id="input-password">
+        </label>
+        <input type="submit" value="Login">
+    </form>
+</body>
+</html>
 <?php
 
 require_once(__DIR__ . "/rpc/getdb.php");
@@ -41,45 +81,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Failure";
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Register</title>
-</head>
-
-<body>
-    <h1>Register</h1>
-    <form action="registerUser.php" method="post">
-
-    <label for="input-email">
-            email
-            <input type="text" name="email" id="email-username">
-        </label>
-
-    <label for="input-firstname">
-            firstname
-            <input type="text" name="firstname" id="input-firstname">
-        </label>
-
-    <label for="input-lastname">
-            lastname
-            <input type="text" name="lastname" id="input-lastname">
-        </label>        
-
-    <label for="input-username">
-            username
-            <input type="text" name="username" id="input-username">
-        </label>
-        
-    
-    <label for="input-password">
-            Password
-            <input type="password" name="password" id="input-password">
-        </label>
-        <input type="submit" value="Login">
-    </form>
-</body>
-
-</html>

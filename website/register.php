@@ -7,7 +7,7 @@ require_once(__DIR__ .'/website/rpc/path.inc');
 require_once(__DIR__ .'/website/get_host_info.inc');
 require_once(__DIR__ .'/website/RabbitMQLib.inc');
 
-
+/*
 function register($email, $fname, $lname, $username, $password){
   try{
     //payload = ?, label(AKA routing key) = testServer in RabbitMQini
@@ -34,6 +34,7 @@ function register($email, $fname, $lname, $username, $password){
     return "can call register function - Webserver side";
   }
 }
+*/
 ?>
 
 <link rel="stylesheet" href="styles.css">

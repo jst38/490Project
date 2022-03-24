@@ -56,7 +56,7 @@ function register($email, $fname, $lname, $username, $password){
         <br>HELLO WELCOME TO OUR PAGE!!!</br>
                     <a href="login.html">Log In Here</a>
 
-        <form action="" method="POST" >
+        <form action="start_rpc_client.php" method="POST" >
             <label for="email">email:</label>
             <input type="text" id="email" name="email"><br><br>
 

@@ -1,8 +1,8 @@
 #!/usr/bin/php
 <?php
-require_once(__DIR__ .'/rpc/path.inc');
-require_once(__DIR__ .'/get_host_info.inc');
-require_once(__DIR__ .'/RabbitMQLib.inc');
+require_once(__DIR__ .'/website/rpc/path.inc');
+require_once(__DIR__ .'/website/get_host_info.inc');
+require_once(__DIR__ .'/website/RabbitMQLib.inc');
 
 
 function register($email, $fname, $lname, $username, $password){

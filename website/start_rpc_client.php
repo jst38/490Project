@@ -1,19 +1,15 @@
+#!/usr/bin/php
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_All);
-
-
 require_once(__DIR__ .'/website/rpc/path.inc');
 require_once(__DIR__ .'/website/get_host_info.inc');
 require_once(__DIR__ .'/website/RabbitMQLib.inc');
-
+echo "test 1";
 
 function register($email, $fname, $lname, $username, $password){
   try{
     //payload = ?, label(AKA routing key) = testServer in RabbitMQini
     $client = new rabbitMQClient("RabbitMQ.ini","testServer");
-
+    echo "test 2";
     $request = array(); //creates an array
     $request['type'] = "register";  //[] map key and value pairs into array
     $request['email'] = $email;
@@ -21,11 +17,12 @@ function register($email, $fname, $lname, $username, $password){
     $request['lname'] = $lname;
     $request['username'] = $username;
     $request['password'] = $password;
+    echo "test 3";
     //$request['message'] = $msg;
 
     $response = $client->send_request($request);
     //$response = $client->publish($request);
-
+    echo "please run 4";
     return $response;
 
     echo "client received response: ".PHP_EOL;

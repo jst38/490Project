@@ -1,11 +1,11 @@
 <?php
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
-error_reporting(E_All);
+//error_reporting(E_All);
 
-require_once(__DIR__ .'/website/rpc/path.inc');
-require_once(__DIR__ .'/website/get_host_info.inc');
-require_once(__DIR__ .'/website/RabbitMQLib.inc');
+require_once(__DIR__ .'/rpc/path.inc');
+require_once(__DIR__ .'/get_host_info.inc');
+require_once(__DIR__ .'/RabbitMQLib.inc');
 
 /*
 function register($email, $fname, $lname, $username, $password){
@@ -61,9 +61,9 @@ function register($email, $fname, $lname, $username, $password){
         <br>HELLO WELCOME TO OUR PAGE!!!</br>
                     <a href="login.html">Log In Here</a>
 
-        <form action="start_rpc_client.php" method="POST" >
+        <form action="start_rpc_client.php" method="post" >
             <label for="email">email:</label>
-            <input type="text" id="email" name="email"><br><br>
+            <input type="email" id="email" name="email"><br><br>
 
             <label for="fname">First name:</label>
             <input type="text" id="fname" name="fname"><br><br>
@@ -75,10 +75,18 @@ function register($email, $fname, $lname, $username, $password){
             <input type="text" id="username" name="username"><br><br>
 
             <label for="password">Password:</label>
-            <input type="text" id="password" name="password"><br><br>
+            <input type="password" id="password" name="password"><br><br>
 
-            <input type="submit" value="Register">
+            <input type="submit" name="register" value="Register">
         </form>
+        <!-- Notes for the html code:
+        for= and id= have to be EXACTLY the same, bindes them to each other
+         <input type = "submit"> defines a button that sends data to a form handler(another script), 
+         the form handler is specified in action =""
+        input field must have a name attribute to submit
+        Method = POST sends the info as HTTP
+        <input value ="" is text on the button>
+      -->
         <!--<button type="button" class="btn" onclick="start_rpc_client.php">Register</button> -->
     </body>
 <html>

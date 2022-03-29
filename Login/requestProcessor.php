@@ -1,5 +1,8 @@
 #!/usr/bin/php
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+
 //require_once('path.ini');
 //require_once('get_host_info.inc');
 //require_once('rabbitMQLib.inc');
@@ -21,7 +24,7 @@ function requestProcessor($request){
     case "login":
         return login($request['Username'],$request['password']);
     case "register":
-      return register($request['email'], $request['Firstname'],$request['Lastname'],$request['Username'],$request['password']);
+      return register($request['email'], $request['fname'],$request['lname'],$request['username'],$request['password']);
       
   }
   return array("returnCode" => '0', 'message'=>"Server received request and processed");

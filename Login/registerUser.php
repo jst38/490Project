@@ -18,7 +18,7 @@ function register($email, $fname, $lname, $username, $password) {
             $salt = random_bytes(16);
             $password_hash = hash("sha256", $salt . $password, true);
 
-            $stmt = $db->prepare("Insert INTO users(Email, Fname, Lname, Username, Password) Values (:email, :fname, :lame, :username, :password)");
+            $stmt = $db->prepare("Insert INTO User(Email, Fname, Lname, Username, Password) Values (:email, :fname, :lame, :username, :password)");
             $params = array(
                 ":email"=>$email,
                 ":fname"=>$fname,
@@ -27,7 +27,7 @@ function register($email, $fname, $lname, $username, $password) {
                 ":password"=>$password_hash,
                 );
             $results = $stmt->execute($params);
-           // echo "db returned: " . var_export($r, true);
+           echo "db returned: ";
            // $e = $stmt->errorInfo();
 		   
 			echo "<br>Welcome! You successfully registered, please login.";

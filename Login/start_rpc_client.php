@@ -31,8 +31,10 @@ function register($email, $fname, $lname, $username, $password){
 
           $response = $client->send_request($request);
           //$response = $client->publish($request);
-          echo "please run 4";
+          //echo "please run 4";
           return $response;
+
+          echo "Response was returned: $response";
 
           echo "client received response: ".PHP_EOL;
 

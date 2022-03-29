@@ -18,13 +18,13 @@ function register($email, $fname, $lname, $username, $password) {
             $salt = random_bytes(16);
             $password_hash = hash("sha256", $salt . $password, true);
 
-            $stmt = $db->prepare("Insert INTO users(email, Fname, Lname, Username, Password) Values (:email, :Fname, :Lame, :username, :password)");
+            $stmt = $db->prepare("Insert INTO users(Email, Fname, Lname, Username, Password) Values (:email, :fname, :lame, :username, :password)");
             $params = array(
                 ":email"=>$email,
                 ":fname"=>$fname,
                 ":lname"=>$lname,
                 ":username"=>$username,
-                ":password"=>$password,
+                ":password"=>$password_hash,
                 );
             $results = $stmt->execute($params);
            // echo "db returned: " . var_export($r, true);

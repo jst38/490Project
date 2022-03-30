@@ -30,7 +30,7 @@ function register($email, $fname, $lname, $username, $password){
           //$request['message'] = $msg;
 
           $response = $client->send_request($request);
-          //$response = $client->publish($request);
+          $response = $client->publish($request);
           //echo "please run 4";
           return $response;
 

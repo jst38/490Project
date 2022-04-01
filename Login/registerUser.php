@@ -14,10 +14,9 @@ function register($email, $fname, $lname, $username, $password) {
         $db = getDB();
         
         if(isset($db)){
-            echo "\nIsset in registerUser.php vardump\n";
-            var_dump($db);
+
             $salt = random_bytes(16);
-            $password_hash = hash("Md5", $salt . $password, false);
+            $password_hash = hash("sha256", $salt . $password, false);
 
             $stmt = $db->prepare("INSERT INTO Users(Email, Fname, Lname, Username, Password) 
             VALUES (:email, :fname, :lname, :username, :password)");

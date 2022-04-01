@@ -6,19 +6,17 @@ require_once('get_host_info.inc');
 require_once('rabbitMQLib.inc');
 
 function requestProcessor($request){
+    echo "var_dump request - RabbitMQServer.php"
     var_dump($request);
-    if(!isset($request['type']))
-
-    {
-    return "ERROR: unsupported message type";
-    }
-    switch ($request['type'])
-    {
-    case "login":
-        return login($request['Username'],$request['password']);
-    case "registerUser":
-      return registerUser($request['email'], $request['Firstname'],$request['Lastname'],$request['Username'],$request['password']);
-      
+    if(!isset($request['type'])){
+        return "ERROR: unsupported message type";
+    } 
+    switch ($request['type']){
+        case "login":
+            return login($request['Username'],$request['password']);
+        case "registerUser":
+            return registerUser($request['email'], $request['Firstname'],$request['Lastname'],$request['Username'],$request['password']);
+          
   }
   //return array("returnCode" => '0', 'message'=>"Server received request and processed");
 }
@@ -26,5 +24,6 @@ function requestProcessor($request){
 $server = new rabbitMQServer("rabbitMQ.ini","testServer");
 
 $server->process_requests('requestProcessor');
+
 exit();
 ?>

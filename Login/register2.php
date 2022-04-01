@@ -9,6 +9,57 @@ require_once(__DIR__ .'/rpc/path.inc');
 require_once(__DIR__ .'/get_host_info.inc');
 require_once(__DIR__ .'/RabbitMQLib.inc');
 
+if($_SERVER["REQUEST_METHOD"]=="POST"){  
+    //validation of variables
+    $email = null;
+    $fname = null;
+    $lname = null;
+    $username = null;
+    $password = null;
+    if (isset($_POST["email"])){
+        $email = $_POST["email"];
+        //add a email/ @ checker
+    }
+    if (isset($_POST["fname"])){
+        $fname = $_POST["fname"];
+    }
+    if (isset($_POST["lname"])){
+        $lname = $_POST["lname"];
+    }
+    if (isset($_POST["username"])){
+        $username = $_POST["username"];
+    }
+    if (isset($_POST["password"])){
+        $password = $_POST["password"];
+    }
+    
+    try{
+        $client = new rabbitMQClient("RabbitMQ.ini","testServer");
+
+        $request = array(); //creates an array
+        $request['type'] = "register";  //[] map key and value pairs into array
+        $request['email'] = $email;
+        $request['fname'] = $fname;
+        $request['lname'] = $lname;
+        $request['username'] = $username;
+        $request['password'] = $password;
+        //$request['message'] = $msg;
+
+        $response = $client->send_request($request);
+        $response = $client->publish($request);
+        
+        return $response;
+
+        echo "Response was returned: $response";
+
+        echo "client received response: ".PHP_EOL;
+
+      } //try
+  catch(\Throwable $th){
+    return "can call register function - Webserver side";
+  }
+  
+} //if bracket
 
 ?>
 
@@ -36,7 +87,7 @@ require_once(__DIR__ .'/RabbitMQLib.inc');
         <br>HELLO WELCOME TO OUR PAGE!!!</br>
                     <a href="login.html">Log In Here</a>
 
-        <form action="start_rpc_client.php" method="post" >
+        <form action="register2.php" method="post" >
             <label for="email">email:</label>
             <input type="email" id="email" name="email"><br><br>
 
@@ -54,5 +105,5 @@ require_once(__DIR__ .'/RabbitMQLib.inc');
 
             <input type="submit" name="register" value="Register">
         </form>
-  </body>
+    </body>
 <html>

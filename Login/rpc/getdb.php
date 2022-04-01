@@ -19,12 +19,14 @@ function getdb(){
                     //create a PDO instance
                     $db = new PDO($dsn, $username, $password);
                     $db ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //PDO::ATTR_ERRMODE, , PDO::ErrMOde_Warning
-                    echo "connection successful";
+                    echo "connection successful - getdb.php";
                 } 
             catch (PDOException $error) {
                     echo $error->getMessage();
                     echo $error->getCode();
                 }
+        //echo "In getdb file";
+        //var_dump($db);
         return $db;
 
     }

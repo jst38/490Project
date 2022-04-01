@@ -11,31 +11,36 @@ require_once(__DIR__ .'/RabbitMQLib.inc');
 function register($email, $fname, $lname, $username, $password) {
     try {
         require_once(__DIR__."/rpc/getdb.php");
-    $db = getDB();
-
+        $db = getDB();
+        
         if(isset($db)){
-
+            echo "\nIsset in registerUser.php vardump\n";
+            var_dump($db);
             $salt = random_bytes(16);
-            $password_hash = hash("sha256", $salt . $password, true);
+            $password_hash = hash("Md5", $salt . $password, false);
 
-            $stmt = $db->prepare("Insert INTO User(Email, Fname, Lname, Username, Password) Values (:email, :fname, :lame, :username, :password)");
+            $stmt = $db->prepare("INSERT INTO Users(Email, Fname, Lname, Username, Password) 
+            VALUES (:email, :fname, :lname, :username, :password)");
             $params = array(
                 ":email"=>$email,
                 ":fname"=>$fname,
                 ":lname"=>$lname,
                 ":username"=>$username,
-                ":password"=>$password_hash,
+                ":password"=>$password_hash
                 );
-            $results = $stmt->execute($params);
-           echo "db returned: ";
-           // $e = $stmt->errorInfo();
+            $stmt->execute($params);
+            $error = $stmt->errorInfo();
 		   
-			echo "<br>Welcome! You successfully registered, please login.";
+			return "Welcome! You successfully registered, please login.";
             
         }
     } catch (\Throwable $th) {
         return "you cant reg. DB "; 
 
     } 
-}
+} //end of register()
+
+//register('denise@gmail.com', 'denise', 'cherdak', 'dcherdak', 'fuck you');
+
+
 ?>

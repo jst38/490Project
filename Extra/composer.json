@@ -3,6 +3,7 @@
     "description": "IT490 composer.json file",
     "minimum-stability": "dev",
     "require": {
-        "videlalvaro/php-amqplib": " 2.5.*"
+        "php-amqplib/php-amqplib": ">=3.0"
+        
     }
 }

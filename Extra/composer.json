@@ -4,6 +4,9 @@
     "minimum-stability": "dev",
     "require": {
         "php-amqplib/php-amqplib": ">=3.0"
+<<<<<<< HEAD
         
+=======
+>>>>>>> 164cc017ddd17bdc65dce85ef257f958e04bcad2
     }
 }

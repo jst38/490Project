@@ -9,6 +9,8 @@ require_once(__DIR__ .'/rpc/path.inc');
 require_once(__DIR__ .'/get_host_info.inc');
 require_once(__DIR__ .'/RabbitMQLib.inc');
 
+require_once(__DIR__ . '/start_rpc_client2.php');
+
 if($_SERVER["REQUEST_METHOD"]=="POST"){  
     //validation of variables
     $email = null;
@@ -32,7 +34,12 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     if (isset($_POST["password"])){
         $password = $_POST["password"];
     }
+
+    $dbConnection = new Web_to_Database_RpcClient();
+    $response = $fibonacci_rpc->call(30); //blocks for 30 secs.
+    echo ' [.] Got ', $response, "\n";
     
+    /*
     try{
         $client = new rabbitMQClient("RabbitMQ.ini","testServer");
 
@@ -56,10 +63,13 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 
       } //try
   catch(\Throwable $th){
-    return "can call register function - Webserver side";
+    return "can't call register function - Webserver side";
   }
-  
+  */
+
 } //if bracket
+
+
 
 ?>
 

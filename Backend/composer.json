@@ -1,0 +1,8 @@
+{
+    "name": "vendor/autoload.php",
+    "description": "IT490 composer.json file",
+    "minimum-stability": "dev",
+    "require": {
+        "php-amqplib/php-amqplib": ">=3.0"
+    }
+}

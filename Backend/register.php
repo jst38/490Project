@@ -10,6 +10,8 @@ require_once(__DIR__ .'/get_host_info.inc');
 require_once(__DIR__ .'/RabbitMQLib.inc');
 
 
+
+
 ?>
 
 <link rel="stylesheet" href="styles.css">

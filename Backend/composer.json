@@ -5,4 +5,8 @@
     "require": {
         "php-amqplib/php-amqplib": ">=3.0"
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 9c4b981e822bd38d84242cf98a0543cb7e99012f

@@ -5,11 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-<<<<<<< HEAD
-        'reference' => '522f57311195ae6804e9269f7f28a79131e15566',
-=======
-        'reference' => '2e28dbe71ea9600541267710884a5fc00ce86f6e',
->>>>>>> 9c4b981e822bd38d84242cf98a0543cb7e99012f
+        'reference' => '5b939393eb50242a986aeb3dbd02826bae3dba56',
         'name' => 'vendor/autoload.php',
         'dev' => true,
     ),
@@ -56,11 +52,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-<<<<<<< HEAD
-            'reference' => '522f57311195ae6804e9269f7f28a79131e15566',
-=======
-            'reference' => '2e28dbe71ea9600541267710884a5fc00ce86f6e',
->>>>>>> 9c4b981e822bd38d84242cf98a0543cb7e99012f
+            'reference' => '5b939393eb50242a986aeb3dbd02826bae3dba56',
             'dev_requirement' => false,
         ),
         'videlalvaro/php-amqplib' => array(

@@ -35,7 +35,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         $password = $_POST["password"];
     }
 
-    $dbConnection = new Web_to_Database_RpcClient();
+    $rabbitConnection = new DB_RpcClient();
     $response = $fibonacci_rpc->call(30); //blocks for 30 secs.
     echo ' [.] Got ', $response, "\n";
     

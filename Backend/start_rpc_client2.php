@@ -8,7 +8,7 @@ use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Message\AMQPMessage;
 
 
-class Web_To_Database_RpcClient
+class DB_RpcClient
 {
     private $connection;
     private $channel;
@@ -19,39 +19,23 @@ class Web_To_Database_RpcClient
     public function __construct() //call automatically
     {
         //How to get rabbit.ini credentials?
-        $ini_r = parse_ini_file("RabbitMQl.ini");
+        $ini_r = parse_ini_file(__DIR__ . "/RabbitMQ.ini");
 
-        if($ini_r){
-            print_r($ini_r)
+        print_r($ini_r);
 
+        if(isset($ini_r)){
+            ["BROKER_HOST" => $host,"BROKER_PORT" => $port,
+            "USER" => $user, "PASSWORD" => $password, "VHOST"=>$vhost] = $ini_r;
         }
-
-        $this->connection = new AMQPStreamConnection(
-            'localhost',
-            5672,
-            'guest',
-            'guest'
-
-        );
+        else{
+            die("parsing rabbitmq.ini failed.");
+        }
+        $this->connection = new AMQPStreamConnection($host, $port, $user, $password, $vhost);
         $this->channel = $this->connection->channel();
-        list($this->callback_queue, ,) = $this->channel->queue_declare(
-            "",
-            false,
-            false,
-            true,
-            false
-        );
-        $this->channel->basic_consume(
-            $this->callback_queue,
-            '',
-            false,
-            true,
-            false,
-            false,
-            array(
-                $this,
-                'onResponse'
-            )
+        list($this->callback_queue, ,) = $this->channel->queue_declare("", false, false,
+            true, false);
+        $this->channel->basic_consume($this->callback_queue,'', false, true, false, false,
+            array($this,'onResponse')
         );
     }
 

@@ -69,6 +69,6 @@ function register($email, $password){
         Method = POST sends the info as HTTP
         <input value ="" is text on the button>
       -->
-        <!--<button type="button" class="btn" onclick="start_rpc_client.php">Register</button> -->
+        <!--<button type="button" class="btn" onclick="start_rpc_client.php">Login</button> -->
     </body>
 <html>

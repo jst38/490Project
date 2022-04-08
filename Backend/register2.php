@@ -9,7 +9,7 @@ require_once(__DIR__ .'/rpc/path.inc');
 require_once(__DIR__ .'/get_host_info.inc');
 require_once(__DIR__ .'/RabbitMQLib.inc');
 
-require_once(__DIR__ . '/start_rpc_client2.php');
+require_once(__DIR__ . '/frontEnd_rpc_client.php');
 
 if($_SERVER["REQUEST_METHOD"]=="POST"){  
     //validation of variables
@@ -36,7 +36,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     }
 
     $rabbitConnection = new DB_RpcClient();
-    $response = $fibonacci_rpc->call(30); //blocks for 30 secs.
+    $response = $rabbitConnection->call(30); //blocks for 30 secs.
     echo ' [.] Got ', $response, "\n";
     
     /*

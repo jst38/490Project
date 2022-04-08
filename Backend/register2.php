@@ -4,11 +4,9 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 //error_reporting(E_All);
-
 require_once(__DIR__ .'/rpc/path.inc');
 require_once(__DIR__ .'/get_host_info.inc');
 require_once(__DIR__ .'/RabbitMQLib.inc');
-
 require_once(__DIR__ . '/frontEnd_rpc_client.php');
 
 if($_SERVER["REQUEST_METHOD"]=="POST"){  
@@ -38,39 +36,8 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     $rabbitConnection = new DB_RpcClient();
     $response = $rabbitConnection->call(30); //blocks for 30 secs.
     echo ' [.] Got ', $response, "\n";
-    
-    /*
-    try{
-        $client = new rabbitMQClient("RabbitMQ.ini","testServer");
-
-        $request = array(); //creates an array
-        $request['type'] = "register";  //[] map key and value pairs into array
-        $request['email'] = $email;
-        $request['fname'] = $fname;
-        $request['lname'] = $lname;
-        $request['username'] = $username;
-        $request['password'] = $password;
-        //$request['message'] = $msg;
-
-        $response = $client->send_request($request);
-        $response = $client->publish($request);
-        
-        return $response;
-
-        echo "Response was returned: $response";
-
-        echo "client received response: ".PHP_EOL;
-
-      } //try
-  catch(\Throwable $th){
-    return "can't call register function - Webserver side";
-  }
-  */
 
 } //if bracket
-
-
-
 ?>
 
 <link rel="stylesheet" href="styles.css">

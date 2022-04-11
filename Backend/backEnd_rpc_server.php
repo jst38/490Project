@@ -7,21 +7,29 @@ require_once __DIR__ . '/vendor/autoload.php';
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Message\AMQPMessage;
 
-$ini_r = parse_ini_file(__DIR__ . "/RabbitMQ.ini");
+$ini_r = parse_ini_file(__DIR__ . "/RabbitMQ.ini"); //Return RabbitMQ.ini as an array
 
-        print_r($ini_r);
+        //print_r($ini_r);
 
+        //check if parse inserted into $ini_r, map values to $ 
         if(isset($ini_r)){
-            ["BROKER_HOST" => $host,"BROKER_PORT" => $port,
-            "USER" => $user, "PASSWORD" => $password, "VHOST"=>$vhost] = $ini_r;
+            [
+            "BROKER_HOST" => $host,
+            "BROKER_PORT" => $port,
+            "USER" => $user, 
+            "PASSWORD" => $password, 
+            "VHOST"=>$vhost
+            ] = $ini_r;
         }
         else{
-            die("parsing rabbitmq.ini failed.");
+            exit("parsing rabbitmq.ini failed."); //if not parsed, kill process
         }
-$connection = new AMQPStreamConnection($host, $port, $user, $password, $vhost);
-$channel = $connection->channel();
+$connection = new AMQPStreamConnection($host, $port, $user, $password, $vhost); //create socket connection, specifies which rabbit node on which host
+$channel = $connection->channel(); //open channel
 
-$channel->queue_declare('rpc_queue', false, false, false, false);
+$channel->queue_declare('rpc_queue', false, false, false, false); 
+//declares a queue if specific queue does not already exists
+//declare on publisher and consumer incase consumer starts up first
 
 echo " [x] Awaiting RPC requests\n";
 $callback = function ($req) {

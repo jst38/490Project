@@ -32,6 +32,7 @@ class rabbitMQServer
 		{
 			$this->auto_delete = $this->machine[$server]["AUTO_DELETE"];
 		}
+
 		$this->exchange = $this->machine[$server]["EXCHANGE"];
 		$this->queue = $this->machine[$server]["QUEUE"];
 	}
@@ -147,6 +148,9 @@ class rabbitMQClient
 	private $routing_key = '*';
 	private $response_queue = array();
 	private $exchange_type = "topic";
+	private $durable = true;
+	private $auto_delete = false;
+	
 
 	function __construct($machine, $server = "rabbitMQ")
 	{
@@ -160,10 +164,15 @@ class rabbitMQClient
 		{
 			$this->exchange_type = $this->machine[$server]["EXCHANGE_TYPE"];
 		}
+		if (isset( $this->machine[$server]["DURABLE"]))
+		{
+			$this->durable = $this->machine[$server]["DURABLE"];
+		}
 		if (isset( $this->machine[$server]["AUTO_DELETE"]))
 		{
 			$this->auto_delete = $this->machine[$server]["AUTO_DELETE"];
 		}
+		
 		$this->exchange = $this->machine[$server]["EXCHANGE"];
 		$this->queue = $this->machine[$server]["QUEUE"];
 	}

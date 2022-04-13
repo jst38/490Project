@@ -7,6 +7,10 @@ require_once __DIR__ . '/vendor/autoload.php';
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Message\AMQPMessage;
 
+require_once(__DIR__ .'/registerUser.php');
+
+
+//First, create queue if not already created using RabbitMQ.ini file
 $ini_r = parse_ini_file(__DIR__ . "/RabbitMQ.ini"); //Return RabbitMQ.ini as an array
 
         //print_r($ini_r);
@@ -24,6 +28,7 @@ $ini_r = parse_ini_file(__DIR__ . "/RabbitMQ.ini"); //Return RabbitMQ.ini as an 
         else{
             exit("parsing rabbitmq.ini failed."); //if not parsed, kill process
         }
+
 $connection = new AMQPStreamConnection($host, $port, $user, $password, $vhost); //create socket connection, specifies which rabbit node on which host
 $channel = $connection->channel(); //open channel
 
@@ -32,12 +37,13 @@ $channel->queue_declare('rpc_queue', false, false, false, false);
 //declare on publisher and consumer incase consumer starts up first
 
 echo " [x] Awaiting RPC requests\n";
-$callback = function ($req) {
-    $n = intval($req->body);
-    echo ' [.] fib(', $n, ")\n";
+
+//callback gets called in basic consume, line 65
+$callback = function ($req) { //calls function with
+    $req->body;
 
     $msg = new AMQPMessage(
-        (string) fib($n),
+        (string) fib($n),  //fib($n) will be the string/message we will return
         array('correlation_id' => $req->get('correlation_id'))
     );
 

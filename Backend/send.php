@@ -10,7 +10,7 @@ $channel = $connection->channel();
 $channel->queue_declare('hello', false, false, false, false);
 
 $msg = new AMQPMessage('Hello World!');
-$channel->basic_publish($msg, '', 'hello');
+$channel->basic_publish($msg, '', 'hello'); //publisher, published messages, "" = default exchange, queue = 'hello'
 
 echo " [x] Sent 'Hello World!'\n";
 

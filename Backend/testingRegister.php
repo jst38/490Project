@@ -15,14 +15,15 @@ function register($email, $fname, $lname, $username, $password) {
         $salt = random_bytes(16);
         $password_hash = hash("md5", $salt . $password, false);
 
-        $stmt = $db->prepare("INSERT INTO Users(Email, Fname, Lname, Username, Password) 
-            VALUES (:email, :fname, :lname, :username, :password)");
+        $stmt = $db->prepare("INSERT INTO Users(Email, Fname, Lname, Username, Password, salt) 
+            VALUES (:email, :fname, :lname, :username, :password, :salt)");
             $params = array(
                 ":email"=>$email,
                 ":fname"=>$fname,
                 ":lname"=>$lname,
                 ":username"=>$username,
-                ":password"=>$password_hash
+                ":password"=>$password_hash,
+                ":salt"=>$salt
                 );
         $stmt->execute($params);
         
@@ -32,5 +33,5 @@ function register($email, $fname, $lname, $username, $password) {
     }
 }  
 
-register("Aggs1@aggs.com","Aggg1", "whyy1","Bro1", "work Please");
+register("denise1@denise.com","denise", "cherdak","denise1", "1234");
 ?>

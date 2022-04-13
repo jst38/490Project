@@ -71,7 +71,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             :Fname, 
             :nLame, 
             :username, 
-            :password
+            :password,
+            :salt
         )");
         
     $query->bind_param("sss", $username, $password_hash, $salt);

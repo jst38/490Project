@@ -4,14 +4,51 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 //error_reporting(E_All);
-
 require_once(__DIR__ .'/rpc/path.inc');
 require_once(__DIR__ .'/get_host_info.inc');
 require_once(__DIR__ .'/RabbitMQLib.inc');
 
+if($_SERVER["REQUEST_METHOD"]=="POST"){  
+    //validation of variables
+    $email = null;
+    $fname = null;
+    $lname = null;
+    $username = null;
+    $password = null;
+    if (isset($_POST["email"])){
+        $email = $_POST["email"];
+        //add a email/ @ checker
+    }
+    if (isset($_POST["fname"])){
+        $fname = $_POST["fname"];
+    }
+    if (isset($_POST["lname"])){
+        $lname = $_POST["lname"];
+    }
+    if (isset($_POST["username"])){
+        $username = $_POST["username"];
+    }
+    if (isset($_POST["password"])){
+        $password = $_POST["password"];
+    }
 
+    $userInfo = array();
+    $userInfo['type'] = "register";
+    $userInfo['email'] = $email;
+    $userInfo['fname'] = $fname;
+    $userInfo['lname'] = $lname;
+    $userInfo['username'] = $username;
+    $userInfo['password'] = $password;
 
+    $client = new rabbitMQClient("RabbitMQ.ini", "testServer");
+    $response = $client->send_request($userInfo);
+    
+    //$rabbitConnection = new DB_RpcClient();
+    //$response = $rabbitConnection->call($msg); //blocks for 30 secs.
+    echo ' [.] Got a response'. "\n";
+    print_r($response);
 
+} //if bracket
 ?>
 
 <link rel="stylesheet" href="styles.css">
@@ -38,7 +75,7 @@ require_once(__DIR__ .'/RabbitMQLib.inc');
         <br>HELLO WELCOME TO OUR PAGE!!!</br>
                     <a href="login.html">Log In Here</a>
 
-        <form action="start_rpc_client.php" method="post" >
+        <form action="register.php" method="post" >
             <label for="email">email:</label>
             <input type="email" id="email" name="email"><br><br>
 
@@ -56,5 +93,5 @@ require_once(__DIR__ .'/RabbitMQLib.inc');
 
             <input type="submit" name="register" value="Register">
         </form>
-  </body>
+    </body>
 <html>

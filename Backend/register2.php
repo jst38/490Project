@@ -33,8 +33,12 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         $password = $_POST["password"];
     }
 
+    $msg = array($email, $fname, $lname, $username, $password);
+    echo "user array" . $msg;
+
+
     $rabbitConnection = new DB_RpcClient();
-    $response = $rabbitConnection->call(30); //blocks for 30 secs.
+    $response = $rabbitConnection->call($msg); //blocks for 30 secs.
     echo ' [.] Got ', $response, "\n";
 
 } //if bracket

@@ -55,9 +55,9 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         <title>PHP - Register</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     </head>
-        <h1> Register Page</h1>
+        <h1> Login Page</h1>
         <br>HELLO WELCOME TO OUR PAGE!!!</br>
-                    <a href="login.html">Log In Here</a>
+                    <a href="register.php">Register Here</a>
 
         <form action="login.php" method="post" >
 

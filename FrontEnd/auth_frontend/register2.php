@@ -1,13 +1,14 @@
 <?php
-/*FOR TESTING PURPOSES ONLYYY*/
+
+//Uses compoeser, DONT USE!!//
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 //error_reporting(E_All);
-
 require_once(__DIR__ .'/rpc/path.inc');
 require_once(__DIR__ .'/get_host_info.inc');
 require_once(__DIR__ .'/RabbitMQLib.inc');
+require_once(__DIR__ . '/frontEnd_rpc_client.php');
 
 if($_SERVER["REQUEST_METHOD"]=="POST"){  
     //validation of variables
@@ -32,37 +33,16 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     if (isset($_POST["password"])){
         $password = $_POST["password"];
     }
-    
-    /*
-    try{
-        $client = new rabbitMQClient("RabbitMQ.ini","testServer");
 
-        $request = array(); //creates an array
-        $request['type'] = "register";  //[] map key and value pairs into array
-        $request['email'] = $email;
-        $request['fname'] = $fname;
-        $request['lname'] = $lname;
-        $request['username'] = $username;
-        $request['password'] = $password;
-        //$request['message'] = $msg;
+    $msg = array($email, $fname, $lname, $username, $password);
+    echo "user array" . $msg;
 
-        $response = $client->send_request($request);
-        $response = $client->publish($request);
-        
-        return $response;
 
-        echo "Response was returned: $response";
-
-        echo "client received response: ".PHP_EOL;
-
-      } //try
-  catch(\Throwable $th){
-    return "can call register function - Webserver side";
-  }
-  */
+    $rabbitConnection = new DB_RpcClient();
+    $response = $rabbitConnection->call($msg); //blocks for 30 secs.
+    echo ' [.] Got ', $response, "\n";
 
 } //if bracket
-
 ?>
 
 <link rel="stylesheet" href="styles.css">

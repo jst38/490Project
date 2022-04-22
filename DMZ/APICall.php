@@ -1,4 +1,6 @@
 <?php
+//It workks!!
+
 function APIcall($ingredients){
     $ch = require "initcurl.php";
 

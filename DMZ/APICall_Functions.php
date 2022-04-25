@@ -1,8 +1,11 @@
+#!/usr/bin/php
 <?php
-//It workks!!
+//API Functions & calls
 
-function APIcall($ingredients){
+function API_Search($ingredients){
     $ch = require "initcurl.php";
+
+    echo "API function search was called".PHP_EOL;
 
     $query = $ingredients;
 
@@ -15,10 +18,11 @@ function APIcall($ingredients){
     curl_close($ch);
 
     //$data = json_decode($response);
-    $data = json_decode($response, true); //returns as associative array
+    $searchData = json_decode($response, true); //returns as associative array
 
-    return $data;
+    return $searchData;
 }
+
 
 //APIcall("chicken");
 

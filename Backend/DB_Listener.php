@@ -6,13 +6,14 @@ ini_set('display_startup_errors', 1);
 require_once(__DIR__ .'/rpc/path.inc');
 require_once(__DIR__ .'/get_host_info.inc');
 require_once(__DIR__ .'/RabbitMQLib.inc');
-require_once(__DIR__. "/functionList.php");
+require_once(__DIR__. '/functionList.php');
+require_once(__DIR__ .'/DMZcall.php');
 
 function requestProcessor($request)
 {
   echo "received request".PHP_EOL;
   var_dump($request);
-  //here
+  
   if(!isset($request['type']))
   {
     return "ERROR: unsupported message type";
@@ -25,10 +26,13 @@ function requestProcessor($request)
     case "login":
         echo "recieved login request". PHP_EOL;
         return doLogin($request['username'],$request['password']);
-    //case "validate_session":
+    case "validate_session":
       //return doValidate($request['sessionId']);
+    case "search recipes":
+      echo "recieved search ingrediates".PHP_EOL;
+      return DMZcall($request['ingredient']);  //throws ingredient to DMZcall.php
   }
-  return array("returnCode" => '0', 'message'=>"Server received request and processed");
+  //return array("returnCode" => '0', 'message'=>"Server received request and processed");
 }
 
 $server = new rabbitMQServer("RabbitMQ.ini","testServer");

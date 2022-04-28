@@ -3,7 +3,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 //error_reporting(E_All);
 
-require_once(__DIR__ .'/rpc/path.inc');
+require_once(__DIR__ .'/path.inc');
 require_once(__DIR__ .'/get_host_info.inc');
 require_once(__DIR__ .'/RabbitMQLib.inc');
 
@@ -65,9 +65,9 @@ function register($email, $fname, $lname, $username, $password){
     </head>
         <h1> Register Page</h1>
         <br>HELLO WELCOME TO OUR PAGE!!!</br>
-                    <a href="login.html">Log In Here</a>
+                    <a href="login.php">Log In Here</a>
 
-        <form action="start_rpc_client.php" method="post" >
+        <form action="register.php" method="post" >
             <label for="email">email:</label>
             <input type="email" id="email" name="email"><br><br>
 

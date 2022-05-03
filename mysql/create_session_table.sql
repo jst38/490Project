@@ -1,5 +1,5 @@
 CREATE TABLE Session_Tokens (
 	Session_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	User_ID Int NOT NULL
+	User_ID Int NOT NULL,
 	FOREIGN KEY (User_ID) REFERENCES Users(User_ID)
   	);

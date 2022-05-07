@@ -20,11 +20,13 @@ function API_Search($ingredients){
     //$data = json_decode($response);
     $searchData = json_decode($response, true); //returns as associative array
 
-    return $searchData;
+    print_r($searchData);
+
+    //return $searchData;
 }
 
 
-//APIcall("chicken");
+API_Search("chicken");
 
 //q=apple%20and%20chicken%2C%20rice
 //search for: apple and chicken, rice. 

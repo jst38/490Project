@@ -86,14 +86,10 @@ function doLogin($username,$password){
 function registerUser($email, $fname, $lname, $username, $password) {
     echo "in registerUser function" . PHP_EOL;
     try {
-        require_once(__DIR__."/getdb.php");
+        require(__DIR__."/getdb.php");
         $db = getDB();
-        
-        if(isset($db)){
+
             echo "in fuction registerUser - isset(db) is set to true". PHP_EOL;
-            
-            //Add Select query to check if username & email has already been taken
-            //foreach loop?
 
             $salt = random_bytes(16);
             $password_hash = hash("sha256", $salt . $password, false);
@@ -110,12 +106,13 @@ function registerUser($email, $fname, $lname, $username, $password) {
                 );
             $stmt->execute($params);
             $error = $stmt->errorInfo();
+            
             if($error[0] == "00000"){
                 return "Welcome! You successfully registered, please login!";
             }
             else{
-                if($e[0] == "23000"){
-                    return "Username or email already exists. Please pick a unique username or email.";
+                if($error[0] == "23000"){
+                    return "Username or email already exists. Please pick a unique username and email.";
                 }
                 else {
                     return "An error occurred, please try again.";
@@ -123,9 +120,14 @@ function registerUser($email, $fname, $lname, $username, $password) {
             }
 			return "There was a validation error. please try again";
             
-        }
-    } catch (\Throwable $th) {
-        echo "error in register function". PHP_EOL; 
+    }catch (\Throwable $th) {
+            //echo "error in register function: " .$th->getmessage(). PHP_EOL; 
 
-    } 
+        } 
 } //end of register()
+
+/*
+$test = registerUser("te@gmail.com", "test", "test", "test", "1234");
+echo "\nThe Return Value: \n";
+var_dump($test);
+*/

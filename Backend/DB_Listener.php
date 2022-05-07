@@ -6,8 +6,8 @@ ini_set('display_startup_errors', 1);
 require_once(__DIR__ .'/rpc/path.inc');
 require_once(__DIR__ .'/get_host_info.inc');
 require_once(__DIR__ .'/RabbitMQLib.inc');
-require_once(__DIR__. '/functionList.php');
-require_once(__DIR__ .'/DMZcall.php');
+require_once(__DIR__. '/partials/functionList.php');
+//require_once(__DIR__ .'/DMZcall.php');
 
 function requestProcessor($request)
 {

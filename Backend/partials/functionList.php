@@ -8,8 +8,9 @@ ini_set('display_startup_errors', 1);
 //Backend Functions
 
 //------------------------------------Session Token Functions-----------------------------------//
-function generateRandStr($length = 10)
+function generateRandStr()
 {
+    $length = 10;
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $charsLength = strlen($characters);
     $randstring = '';
@@ -19,25 +20,45 @@ function generateRandStr($length = 10)
     return $randstring;
 }
 
-function setSession(){
+function setSession($userID, $session)
+{    
+    {
+        try {
+            require_once(__DIR__."/getdb.php");
+            $db = getDB();
 
+            if(isset($db)){
+                $stmt = $db->prepare("INSERT INTO Session_Tokens(Session_ID, User_ID) VALUES(:sessionid, :userID)");
+                $params = array(
+                    ":sessionid"=>$session,
+                    ":userID"=>$userID,
+                    );
+                $stmt->execute($params);
+
+                return "Session token was set" . PHP_EOL;
+        
+            }
+        } catch (Exception $e) {
+            echo "/n error in setSession function - DB ". $e->getMessage() . PHP_EOL; 
+        }
+    }
 }
 
 
 //-----------------------------User Data Functions(Web to Server)------------------------------------//
 function doLogin($username,$password){
     try {
-        require(__DIR__."/rpc/getdb.php");
+        require_once(__DIR__."/getdb.php");
         $db = getDB();
         
         if(isset($db)){
             echo "login in fuction - isset(db) is set to true". PHP_EOL;
 
-            $stmt = $db->prepare("SELECT Username, Password, salt FROM Users WHERE Username=?");
+            $stmt = $db->prepare("SELECT * FROM Users WHERE Username=?");
             $stmt->bindParam(1, $username, PDO::PARAM_STR);
             $stmt->execute();
             $error = $stmt->errorInfo();
-
+            
             $results = $stmt->fetch(PDO::FETCH_ASSOC); //change to PDO Fetch
             echo "Result from SQL select query - DoLogin function". PHP_EOL;
             print_r($results);
@@ -48,12 +69,10 @@ function doLogin($username,$password){
             else{
                 $str = generateRandStr();
 
-                //set a session token here
+                setSession(intval($results['User_ID']), $str);
                 
                 return "Welcome! You successfully login.". PHP_EOL;
             }
-            
-           
 
             //return "Welcome! You successfully registered, please l`ogin.";
             
@@ -65,8 +84,9 @@ function doLogin($username,$password){
 } //end of login
 
 function registerUser($email, $fname, $lname, $username, $password) {
+    echo "in registerUser function" . PHP_EOL;
     try {
-        require(__DIR__."/rpc/getdb.php");
+        require_once(__DIR__."/getdb.php");
         $db = getDB();
         
         if(isset($db)){
@@ -86,12 +106,22 @@ function registerUser($email, $fname, $lname, $username, $password) {
                 ":lname"=>$lname,
                 ":username"=>$username,
                 ":password"=>$password_hash,
-                ":salt"=>$salt //change the varchar to to store another datatype
+                ":salt"=>$salt
                 );
             $stmt->execute($params);
             $error = $stmt->errorInfo();
-		   
-			return "Welcome! You successfully registered, please login.";
+            if($error[0] == "00000"){
+                return "Welcome! You successfully registered, please login!";
+            }
+            else{
+                if($e[0] == "23000"){
+                    return "Username or email already exists. Please pick a unique username or email.";
+                }
+                else {
+                    return "An error occurred, please try again.";
+                }
+            }
+			return "There was a validation error. please try again";
             
         }
     } catch (\Throwable $th) {

@@ -4,8 +4,9 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 //error_reporting(E_All);
 require_once(__DIR__ .'/rpc/path.inc');
-require_once(__DIR__ .'/get_host_info.inc');
-require_once(__DIR__ .'/RabbitMQLib.inc');
+require_once(__DIR__ .'/rpc/get_host_info.inc');
+require_once(__DIR__ .'/rpc/RabbitMQLib.inc');
+require_once(__DIR__ .'/include/nav.php');
 
 if($_SERVER["REQUEST_METHOD"]=="POST"){  
     //validation of variables
@@ -41,9 +42,6 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 
     $client = new rabbitMQClient("RabbitMQ.ini", "testServer");
     $response = $client->send_request($userInfo);
-    
-    //$rabbitConnection = new DB_RpcClient();
-    //$response = $rabbitConnection->call($msg); //blocks for 30 secs.
     echo ' [.] Got a response'. "\n";
     print_r($response);
 
@@ -72,7 +70,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     </head>
         <h1> Register Page</h1>
         <br>HELLO WELCOME TO OUR PAGE!!!</br>
-                    <a href="login.html">Log In Here</a>
+                    <a href="login.php">Log In Here</a>
 
         <form action="register.php" method="post" >
             <label for="email">email:</label>

@@ -9,3 +9,4 @@ For webserver we are allowing port 80 and 443
 Other than that for NAGIOS we will allow port 5666
 
 allow port 3306
+

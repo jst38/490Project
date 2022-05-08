@@ -41,8 +41,37 @@ function setSession($session, $userID)
             echo "/n error in setSession function - DB ". $e->getMessage() . PHP_EOL; 
         }
     }
+    
+    function sid_to_uid($sid)
+    {
+        try {
+            $db = getdb();
+            $stmt = $db->prepare("SELECT User_ID from Session_Tokens where Session_ID = :std");
+            $params = array(":std" => $sid);
+            $stmt->execute($params);
+    
+            $results = $stmt->fetch(PDO::FETCH_ASSOC);
+            $uid = $results["user_id"]; 
+           
+            return $uid;
+        } catch (\Throwable $th) {
+            echo "Error in sid_to_userid function - " . $th->getmessage();
+        }
+    } //end of sid_to_uid;
 }
 
+function logout($sid)
+{
+    try {
+        $db = getdb();
+        $stmt = $db->prepare("DELETE FROM Session_Tokens where `Session_id` = :std");
+        $params = array(":std" => $sid);
+        $stmt->execute($params);
+        return true;
+    } catch (\Throwable $th) {
+        echo "logout functions: " . $th->getMessage();
+    }
+}
 
 //-----------------------------User Data Functions(Web to Server)------------------------------------//
 function doLogin($username,$password){

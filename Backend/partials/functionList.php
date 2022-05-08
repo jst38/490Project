@@ -61,6 +61,13 @@ function doLogin($username,$password){
             echo "Result from SQL select query - DoLogin function". PHP_EOL;
             print_r($results);
 
+            $dbhash = $results["Password"];
+            $loginHash = hash("sha256", $results['salt'] . $password, false);
+            echo "db hash: ";
+            var_dump($dbhash);
+            echo "\nlogin hash: ";
+            var_dump($loginHash); 
+
             if((hash("sha256", $results['salt'] . $password, false) !== $results["Password"])) { //checks username and password
                 return "Failed Login, Please check that Username and Password are correct". PHP_EOL;
             }
@@ -126,11 +133,12 @@ function registerUser($email, $fname, $lname, $username, $password) {
 /*
 $sesNum = generateRandStr(); //rtns string
 //$sesTest = setSession($sesNum, 58); //
-$test = doLogin("test","test");
+$test = doLogin("te2","1234"); //correct password is 1234
 echo "\nThe Return Value: \n";
 var_dump($test);
-*/
+
 
 $test = registerUser("te@gmail.com", "test", "test", "te", "1234");
 echo "\nThe Return Value: \n";
 var_dump($test);
+*/

@@ -7,6 +7,7 @@ ini_set('display_startup_errors', 1);
 require_once(__DIR__ .'/rpc/path.inc');
 require_once(__DIR__ .'/rpc/get_host_info.inc');
 require_once(__DIR__ .'/rpc/RabbitMQLib.inc');
+require_once(__DIR__ . '/include/nav.php');
 
 if($_SERVER["REQUEST_METHOD"]=="POST"){  
     $username = null;
@@ -24,7 +25,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     $userInfo['username'] = $username;
     $userInfo['password'] = $password;
 
-    $client = new rabbitMQClient("loginQueue.ini", "LoginQueue");
+    $client = new rabbitMQClient("RabbitMQ.ini", "testServer");
     $response = $client->send_request($userInfo);;
     
     //$rabbitConnection = new DB_RpcClient();

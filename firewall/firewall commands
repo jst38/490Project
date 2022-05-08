@@ -1,0 +1,11 @@
+Work done by Baljit and mahi
+sudo ufw enable - to enable firewall
+sudo ufw allow 22
+sudow ufw allow 15672
+sudo ufw status ( to check status and if it is enabled)
+We are only doing allows as it denies everything else by default
+For webserver we are allowing port 80 and 443
+80 for HTTP in dev environment and 443 for HTTPS in prod in environment
+Other than that for NAGIOS we will allow port 5666
+
+allow port 3306

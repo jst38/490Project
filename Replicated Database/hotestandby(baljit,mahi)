@@ -1,0 +1,6 @@
+CHANGE MASTER TO MASTER_HOST='19.168.191.217',
+    -> MASTER_USER='baljit',
+    -> MASTER_PASSWORD='Baljit2020.',
+    -> MASTER_LOG_FILE='mysql-bin.000202',
+    -> MASTER_LOG_POS=324;  (write this command every time you restart machine because it goes out of sync) (we will stick with the same username and password)( MASTER_LOG_FILE='mysql-bin.000202', MASTER_LOG_POS=324; will change every time )
+x----------------------------x---------------------------------x--------------------------------x

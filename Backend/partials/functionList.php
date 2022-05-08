@@ -3,7 +3,7 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 //error_reporting(E_All);
-//require(__DIR__."/rpc/getdb.php");
+require_once(__DIR__."/getdb.php");
 
 //Backend Functions
 
@@ -20,11 +20,10 @@ function generateRandStr()
     return $randstring;
 }
 
-function setSession($userID, $session)
+function setSession($session, $userID)
 {    
     {
         try {
-            require_once(__DIR__."/getdb.php");
             $db = getDB();
 
             if(isset($db)){
@@ -48,7 +47,6 @@ function setSession($userID, $session)
 //-----------------------------User Data Functions(Web to Server)------------------------------------//
 function doLogin($username,$password){
     try {
-        require_once(__DIR__."/getdb.php");
         $db = getDB();
         
         if(isset($db)){
@@ -69,12 +67,12 @@ function doLogin($username,$password){
             else{
                 $str = generateRandStr();
 
-                setSession(intval($results['User_ID']), $str);
+                setSession($str, $results['User_ID']);
                 
                 return "Welcome! You successfully login.". PHP_EOL;
             }
 
-            //return "Welcome! You successfully registered, please l`ogin.";
+            //return "Welcome! You successfully registered, please login.";
             
         }
     } catch (\Throwable $th) {
@@ -86,7 +84,6 @@ function doLogin($username,$password){
 function registerUser($email, $fname, $lname, $username, $password) {
     echo "in registerUser function" . PHP_EOL;
     try {
-        require(__DIR__."/getdb.php");
         $db = getDB();
 
             echo "in fuction registerUser - isset(db) is set to true". PHP_EOL;
@@ -127,7 +124,13 @@ function registerUser($email, $fname, $lname, $username, $password) {
 } //end of register()
 
 /*
-$test = registerUser("te@gmail.com", "test", "test", "test", "1234");
+$sesNum = generateRandStr(); //rtns string
+//$sesTest = setSession($sesNum, 58); //
+$test = doLogin("test","test");
 echo "\nThe Return Value: \n";
 var_dump($test);
 */
+
+$test = registerUser("te@gmail.com", "test", "test", "te", "1234");
+echo "\nThe Return Value: \n";
+var_dump($test);

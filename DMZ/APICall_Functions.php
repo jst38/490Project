@@ -3,7 +3,7 @@
 //API Functions & calls
 
 function API_Search($ingredients){
-    $ch = require "initcurl.php";
+    $ch = require("init_curl.php");
 
     echo "API function search was called".PHP_EOL;
 

@@ -42,7 +42,6 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 
     $client = new rabbitMQClient("RabbitMQ.ini", "testServer");
     $response = $client->send_request($userInfo);
-    echo ' [.] Got a response'. "\n";
     print_r($response);
 
 } //if bracket

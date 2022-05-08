@@ -5,8 +5,8 @@ ini_set('display_startup_errors', 1);
 
 function getdb(){
     global $db;
-        if(!isset($db)){ //if connection is already there
-            $host = "localhost"; //where is my db stored?
+        if(!isset($db)){ //if connection is not already there
+            $host = "localhost"; 
             $databaseName = "490_db";
             $username = "Denise";
             $password = "password123!";
@@ -25,20 +25,23 @@ function getdb(){
                     $db = new PDO($dsn, $username, $password, $options);
                     echo "connection successful - getdb.php" . PHP_EOL;
                     return $db;
-                } 
-            catch (\Throwable $error) {
+            }catch (\Throwable $error) {
                 echo "error MSG in getdb.php: " . $error->getMessage() . PHP_EOL;
                 echo "error CODE in getdb.php: " . $error->getCode() . PHP_EOL;
+                $db = null;
                     
-                }
-        //echo "In getdb file";
-        
-        //return $db;
+            }
+        } //if !isset bracket
+    return $db;
+} //getdb
 
-    }
-}
+/*
+$conn = getdb();
+echo "conn1: ";
+var_dump($conn);
 
-//$conn = getdb();
-//var_dump($conn);
-
+$conn2 = getdb();
+echo "\n conn2: ";
+var_dump($conn2);
+*/
 ?>

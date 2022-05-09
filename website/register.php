@@ -1,46 +1,50 @@
 <?php
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 //error_reporting(E_All);
+require_once(__DIR__ .'/rpc/path.inc');
+require_once(__DIR__ .'/rpc/get_host_info.inc');
+require_once(__DIR__ .'/rpc/RabbitMQLib.inc');
+require_once(__DIR__ .'/include/nav.php');
 
-require_once(__DIR__ .'/path.inc');
-require_once(__DIR__ .'/get_host_info.inc');
-require_once(__DIR__ .'/RabbitMQLib.inc');
+if($_SERVER["REQUEST_METHOD"]=="POST"){  
+    //validation of variables
+    $email = null;
+    $fname = null;
+    $lname = null;
+    $username = null;
+    $password = null;
+    if (isset($_POST["email"])){
+        $email = $_POST["email"];
+        //add a email/ @ checker
+    }
+    if (isset($_POST["fname"])){
+        $fname = $_POST["fname"];
+    }
+    if (isset($_POST["lname"])){
+        $lname = $_POST["lname"];
+    }
+    if (isset($_POST["username"])){
+        $username = $_POST["username"];
+    }
+    if (isset($_POST["password"])){
+        $password = $_POST["password"];
+    }
 
-if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 60)) {
-  // the last request was more than 1 minutes ago
-  session_unset();     // unset $_SESSION variable for the run-time 
-  session_destroy();   // destroy session data in storage
-}
+    $userInfo = array();
+    $userInfo['type'] = "register";
+    $userInfo['email'] = $email;
+    $userInfo['fname'] = $fname;
+    $userInfo['lname'] = $lname;
+    $userInfo['username'] = $username;
+    $userInfo['password'] = $password;
 
-/*
-function register($email, $fname, $lname, $username, $password){
-  try{
-    //payload = ?, label(AKA routing key) = testServer in RabbitMQini
-    $client = new rabbitMQClient("RabbitMQ.ini","testServer");
+    $client = new rabbitMQClient("RabbitMQ.ini", "testServer");
+    $response = $client->send_request($userInfo);
+    print_r($response);
 
-    $request = array(); //creates an array
-    $request['type'] = "register";  //[] map key and value pairs into array
-    $request['email'] = $email;
-    $request['fname'] = $fname;
-    $request['lname'] = $lname;
-    $request['username'] = $username;
-    $request['password'] = $password;
-    //$request['message'] = $msg;
-
-    $response = $client->send_request($request);
-    //$response = $client->publish($request);
-
-    return $response;
-
-    echo "client received response: ".PHP_EOL;
-
-  } //try
-  catch(\Throwable $th){
-    return "can call register function - Webserver side";
-  }
-}
-*/
+} //if bracket
 ?>
 
 <link rel="stylesheet" href="styles.css">
@@ -60,7 +64,7 @@ function register($email, $fname, $lname, $username, $password){
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minumum-scale=1.0"
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>PHP - Register</title>
+        <title>Register</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     </head>
         <h1> Register Page</h1>
@@ -85,14 +89,5 @@ function register($email, $fname, $lname, $username, $password){
 
             <input type="submit" name="register" value="Register">
         </form>
-        <!-- Notes for the html code:
-        for= and id= have to be EXACTLY the same, bindes them to each other
-         <input type = "submit"> defines a button that sends data to a form handler(another script), 
-         the form handler is specified in action =""
-        input field must have a name attribute to submit
-        Method = POST sends the info as HTTP
-        <input value ="" is text on the button>
-      -->
-        <!--<button type="button" class="btn" onclick="start_rpc_client.php">Register</button> -->
     </body>
 <html>

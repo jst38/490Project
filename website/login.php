@@ -1,38 +1,39 @@
 <?php
+/*FOR TESTING PURPOSES ONLYYY*/
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 //error_reporting(E_All);
-
 require_once(__DIR__ .'/rpc/path.inc');
-require_once(__DIR__ .'/get_host_info.inc');
-require_once(__DIR__ .'/RabbitMQLib.inc');
+require_once(__DIR__ .'/rpc/get_host_info.inc');
+require_once(__DIR__ .'/rpc/RabbitMQLib.inc');
+require_once(__DIR__ . '/include/nav.php');
 
-if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 60)) {
-  // last request was more than 1 minutes ago
-  session_unset();     // unset $_SESSION variable for the run-time 
-  session_destroy();   // destroy session data in storage
-}
+if($_SERVER["REQUEST_METHOD"]=="POST"){  
+    $username = null;
+    $password = null;
+    
+    if (isset($_POST["username"])){
+        $username = $_POST["username"];
+    }
+    if (isset($_POST["password"])){
+        $password = $_POST["password"];
+    }
 
-/*
-function register($email, $password){
-  try{
-    //payload = ?, label(AKA routing key) = testServer in RabbitMQini
-    $client = new rabbitMQClient("RabbitMQ.ini","testServer");
-    $request = array(); //creates an array
-    $request['type'] = "login";  //[] map key and value pairs into array
-    $request['email'] = $email;
-    $request['password'] = $password;
-    //$request['message'] = $msg;
-    $response = $client->send_request($request);
-    //$response = $client->publish($request);
-    return $response;
-    echo "client received response: ".PHP_EOL;
-  } //try
-  catch(\Throwable $th){
-    return "can call register function - Webserver side";
-  }
-}
-*/
+    $userInfo = array();
+    $userInfo['type'] = "login";
+    $userInfo['username'] = $username;
+    $userInfo['password'] = $password;
+
+    $client = new rabbitMQClient("RabbitMQ.ini", "testServer");
+    $response = $client->send_request($userInfo);;
+    
+    //$rabbitConnection = new DB_RpcClient();
+    //$response = $rabbitConnection->call($msg); //blocks for 30 secs.
+    echo ' Got a response'. "\n";
+    print_r($response);
+
+} //if bracket
 ?>
 
 <link rel="stylesheet" href="styles.css">
@@ -52,29 +53,22 @@ function register($email, $password){
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minumum-scale=1.0"
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>PHP - LOGIN</title>
+        <title>Login</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     </head>
-        <h1> LOGIN</h1>
+        <h1> Login Page</h1>
         <br>HELLO WELCOME TO OUR PAGE!!!</br>
-                    <a href="login.html">Log In Here</a>
+                    <a href="register.php">Register Here</a>
 
-        <form action="start_rpc_client.php" method="post" >
-            <label for="email">email:</label>
-            <input type="email" id="email" name="email"><br><br>
+        <form action="login.php" method="post" >
+
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username"><br><br>
+
             <label for="password">Password:</label>
             <input type="password" id="password" name="password"><br><br>
 
-            <input type="submit" name="Login" value="login">
+            <input type="submit" name="login" value="Login">
         </form>
-        <!-- Notes for the html code:
-        for= and id= have to be EXACTLY the same, bindes them to each other
-         <input type = "submit"> defines a button that sends data to a form handler(another script), 
-         the form handler is specified in action =""
-        input field must have a name attribute to submit
-        Method = POST sends the info as HTTP
-        <input value ="" is text on the button>
-      -->
-        <!--<button type="button" class="btn" onclick="start_rpc_client.php">Login</button> -->
     </body>
 <html>

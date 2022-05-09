@@ -1,0 +1,125 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+ul[class="nav"] {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #1cb6e6;
+}
+
+.nav > li {
+    float: left;
+}
+
+.nav > li a {
+    display: inline-block;
+    color: #ffffff;
+    text-align: center;
+    padding: 8px;
+    text-decoration: underline;
+}
+
+.nav > li a:hover {
+    background-color: #000000;
+}
+
+.container{
+    width: 100%;
+    height: 100vh;
+    font-family: sans-serif;
+    background: rgb(26, 26, 29);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.card{
+    width: 550px;
+    height: 300px;
+    box-shadow: 0 0 40px 20px rgba(2, 2, 2, 0.637);
+    perspective: 1000px;
+}
+.inner-box{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform ls;
+}
+.card-front{
+    position: absolute;
+    width: 100%;
+    height: 110%;
+    background-position: center;
+    background-size: cover;
+    background-image: linear-gradient(rgba(43, 43, 46, 0.829),rgba(36, 36, 37, 0.76)),url(kitchen.png);
+    padding: 55px;
+    box-sizing: border-box;
+    backface-visibility: hidden;
+}
+.card-back{
+    transform: rotateY(180deg);
+    position: absolute;
+    width: 100%;
+    height: 155%;
+    background-position: center;
+    background-size: cover;
+    background-image: linear-gradient(rgba(43, 43, 46, 0.829),rgba(36, 36, 37, 0.76)),url(kitchen.png);
+    padding: 55px;
+    box-sizing: border-box;
+    backface-visibility: hidden;
+    
+}
+.card h2{
+    font-weight: normal;
+    font-size: 25px;
+    text-align: left;
+    margin-left: 20px;
+    color: rgba(233, 229, 12, 0.705);
+}
+.input-box{
+    width: 75%;
+    background: transparent; 
+    border: 2px solid rgb(3, 3, 3);
+    margin: 2px 0;
+    height: 32px;
+    border-radius: 20px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    outline: none;
+    text-align: left;
+    color: rgb(196, 193, 11);
+}
+
+::placeholder{
+    color:rgb(245, 229, 8);
+    font-size: 15px;
+    font-family: sans-serif;
+}
+button{
+    width: 25%;
+    background: rgba(0, 0, 0, 0.507); 
+    border: 2px solid rgb(0, 0, 0);
+    margin: 15px 0 0px;
+    height: 32px;
+    border-radius: 20px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    outline: none;
+    color: rgb(247, 231, 18);
+    cursor: pointer;
+    font-family: sans-serif;
+}
+.card, .btn{
+    margin-top: 35px;
+}
+
+hr.one{
+    border: none;
+    height: 2px;
+    background: rgb(170, 159, 5);
+}

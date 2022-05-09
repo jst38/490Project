@@ -1,4 +1,5 @@
 <?php
+/*FOR TESTING PURPOSES ONLY*/
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 
@@ -12,11 +13,7 @@ register a user
 */
 function register($email, $fname, $lname, $username, $password){
         try{
-          echo "called register,";
-          //payload = ?, label(AKA routing key) = testServer in RabbitMQini
           $client = new rabbitMQClient("RabbitMQ.ini","testServer");
-          
-          echo "called client successfully,";
 
           $request = array(); //creates an array
           $request['type'] = "register";  //[] map key and value pairs into array
@@ -25,13 +22,13 @@ function register($email, $fname, $lname, $username, $password){
           $request['lname'] = $lname;
           $request['username'] = $username;
           $request['password'] = $password;
-          echo "test 3";
           //$request['message'] = $msg;
 
           $response = $client->send_request($request);
-          //$response = $client->publish($request);
-          echo "please run 4";
+          $response = $client->publish($request);
           return $response;
+
+          echo "Response was returned: $response";
 
           echo "client received response: ".PHP_EOL;
 
@@ -73,9 +70,5 @@ if($_SERVER["REQUEST_METHOD"]=="POST" && $_POST["register"] ){
   register($email, $fname, $lname, $username, $password);
 
 } //if bracket
-else{
-  echo "Server post method check + post = register did not work";
-}
 //$response = $client->publish($request);
 ?>
-

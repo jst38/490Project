@@ -13,6 +13,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         $ingredients = $_POST["ingredients"];
     }
 
+    
     $userInfo = array();
     $userInfo['type'] = "search";
     $userInfo['ingredients'] = $ingredients;

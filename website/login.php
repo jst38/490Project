@@ -36,6 +36,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 } //if bracket
 ?>
 
+
 <link rel="stylesheet" href="styles.css">
 <!--require_once(__DIR__."");-->
 <!DOCTYPE html>
